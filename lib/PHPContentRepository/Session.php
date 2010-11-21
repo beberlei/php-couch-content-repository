@@ -84,7 +84,8 @@ class Session
     {
         $node = $this->getContentNodeAtPath($path);
         $node->add($this->currentBranch, $blob, $this->user, $message, $tags);
-        
+
+        $this->backend->saveBlob($blob);
         $this->backend->saveContentNode($node);
         $this->backend->saveBranch($this->currentBranch);
     }
@@ -98,11 +99,12 @@ class Session
      * @param array $tags
      * @return void
      */
-    public function commit($path, $blob, $mesage, array $tags = array())
+    public function commit($path, $blob, $message, array $tags = array())
     {
         $node = $this->getContentNodeAtPath($path);
-        $node->update($this->currentBranch, $blob, $author, $message, $tags);
+        $node->update($this->currentBranch, $blob, $this->user, $message, $tags);
 
+        $this->backend->saveBlob($blob);
         $this->backend->saveContentNode($node);
         $this->backend->saveBranch($this->currentBranch);
     }

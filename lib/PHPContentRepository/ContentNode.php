@@ -32,12 +32,12 @@ class ContentNode
     private $commits = array();
 
     /**
-     * @var DateTime
+     * @var int
      */
     private $updated;
 
     /**
-     * @var DateTime
+     * @var int
      */
     private $created;
 
@@ -55,8 +55,7 @@ class ContentNode
 
         $this->uuid = $uuid;
         $this->path = $path;
-        $this->created = new \DateTime("now");
-        $this->updated = new \DateTime("now");
+        $this->created = $this->updated = time();
     }
 
     private function assertValidPath($path)
@@ -134,6 +133,7 @@ class ContentNode
         $branch->addCommit($this, $commit);
         $this->commits[$uuid] = $commit;
         $this->branches[$branch->getName()] = $uuid;
+        $this->updated = time();
 
         if ($tags) {
             $this->tags = array_unique(array_merge($this->tags, $tags));

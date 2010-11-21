@@ -40,7 +40,7 @@ class Commit
     private $parent;
 
     /**
-     * @var DateTime
+     * @var int
      */
     private $created;
 
@@ -52,7 +52,7 @@ class Commit
         $this->author = $author;
         $this->message = $message;
         $this->parent = $parent;
-        $this->created = new \DateTime("now");
+        $this->created = time();
     }
 
     public function getUUID()

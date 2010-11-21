@@ -153,6 +153,6 @@ class BranchTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(array(2, 3, 4), $branch->getCommitHistory());
         $this->assertEquals(array(3, 4), $branch->getCommitHistory(3));
-        $this->assertEQuals(array(2, 3), $branch->getCommitHistory(null, 3));
+        $this->assertEquals(array(2, 3), $branch->getCommitHistory(null, 3));
     }
 }

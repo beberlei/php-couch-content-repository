@@ -22,6 +22,12 @@ interface Backend
     public function generateUUID();
 
     /**
+     * @param object $object
+     * @return void
+     */
+    public function saveBlob($object);
+
+    /**
      * @param ContentNode $content
      * @return void
      */
