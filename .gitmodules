@@ -1,0 +1,3 @@
+[submodule "lib/vendor/doctrine-couchdb-odm"]
+	path = lib/vendor/doctrine-couchdb-odm
+	url = git://github.com/doctrine/couchdb-odm.git
