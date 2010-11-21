@@ -38,4 +38,9 @@ class ContentException extends \Exception
     {
         return new self("Cannot add content with a folders name '" . $path . "' that already contains other content.");
     }
+
+    static public function optimisticLockingException($path)
+    {
+        return new self("Optimistic Locking failed for path '" . $path . "'.");
+    }
 }

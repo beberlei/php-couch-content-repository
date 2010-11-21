@@ -19,6 +19,9 @@ class Session
      */
     private $backend;
 
+    /**
+     * @var array
+     */
     private $paths = array();
 
     /**
@@ -66,12 +69,18 @@ class Session
      * @param string $path
      * @return object
      */
-    public function find($path)
+    public function find($path, $uuidAssertion = null)
     {
         $commitId = $this->currentBranch->getCommitFor($path);
 
         $node = $this->getContentNodeAtPath($path);
-        return $node->getCommit($commitId)->getBlob();
+        $commit = $node->getCommit($commitId);
+
+        if ($uuidAssertion && $uuidAssertion != $commit->getUUID()) {
+            throw ContentException::optimisticLockingException($path);
+        }
+
+        return $commit->getBlob();
     }
 
     /**
